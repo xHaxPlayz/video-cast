@@ -26,8 +26,9 @@
 </head>
 <body>
   <h1>Feliz Aniversário!</h1>
-  <p>Para transmitir o vídeo para a TV, acesse o aplicativo da operadora ou o site e siga as instruções de casting.</p>
+  <p>O vídeo começará em breve.</p>
   <div id="player"></div>
+  <button id="castButton">Transmitir para a TV (Abra o site da operadora)</button>
   <script>
     let player;
 
@@ -41,13 +42,16 @@
     }
 
     function onPlayerReady(event) {
-      // No action needed here, as casting will be done manually
+      // No action needed here
     }
 
     window.onload = function() {
       // Player initialization
+      document.getElementById('castButton').onclick = function() {
+        // Open operator's casting interface with the video URL (implementation depends on your operator)
+        // This section might involve browser automation or a bookmarklet
+      };
     };
   </script>
 </body>
 </html>
-
