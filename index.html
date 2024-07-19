@@ -30,13 +30,27 @@
 </head>
 <body>
   <h1>Happy Birthday, Mom!</h1>
-  <p class="message">Here's a special video for you. Click the button below to cast it to the TV.</p>
+  <p class="message">Here's a special video for you. Click the button below to try opening the YouTube app and casting it to the TV. If that doesn't work, scan the QR code with your phone's camera (assuming a QR code reader app is installed) to open the video in the YouTube app and then cast it to the TV.</p>
   <button id="castButton">Cast Video to TV</button>
+  <img src="YOUR_QR_CODE_IMAGE.png" alt="QR Code for YouTube video">
 
   <script>
     function castToYouTube() {
       const youtubeUrl = "https://youtu.be/gT2wY0DjYGo?si=pGMe0Y4n-dTT0X_l"; // Replace with your desired video URL
-      window.location.href = youtubeUrl;
+      const youtubeAppUrl = "youtube://"; // URL scheme for YouTube app
+
+      // Try opening the YouTube app first (might not work on all devices)
+      try {
+        window.location.href = youtubeAppUrl;
+        // If successful, wait a short time to allow the app to open
+        setTimeout(() => {
+          window.location.href = youtubeUrl; // Redirect to video after a delay
+        }, 1000); // Delay in milliseconds (adjust as needed)
+      } catch (error) {
+        // Handle error if YouTube app can't be opened directly
+        console.error("Error opening YouTube app:", error);
+        window.location.href = youtubeUrl; // Redirect to video URL directly
+      }
     }
 
     const castButton = document.getElementById("castButton");
@@ -44,4 +58,5 @@
   </script>
 </body>
 </html>
+
 
