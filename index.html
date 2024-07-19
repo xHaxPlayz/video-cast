@@ -10,9 +10,9 @@
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: 'au-CC5UEE1KRMKxi', // Substitua pelo ID do seu vídeo
+                height: '390',
+                width: '640',
+                videoId: '98m0QcOhKsIAqQJx', // Substitua pelo ID do seu vídeo
                 events: {
                     'onReady': onPlayerReady
                 }
@@ -21,18 +21,25 @@
 
         function onPlayerReady(event) {
             event.target.playVideo();
-            setTimeout(() => {
-                document.getElementById('castButton').click();
-            }, 3000); // Aguarde 3 segundos para garantir que o vídeo começou
         }
 
         function castVideo() {
-            // Simular o clique no botão de transmissão
-            document.getElementById('castButton').click();
+            const castButton = document.querySelector('button[aria-label="Transmitir"]');
+            if (castButton) {
+                castButton.click();
+            } else {
+                alert('Botão de transmissão não encontrado.');
+            }
         }
 
         window.onload = function() {
-            setTimeout(castVideo, 5000); // Aguarde 5 segundos para garantir que a API foi carregada
+            const checkCastButton = setInterval(() => {
+                const castButton = document.querySelector('button[aria-label="Transmitir"]');
+                if (castButton) {
+                    clearInterval(checkCastButton);
+                    castButton.click();
+                }
+            }, 3000); // Verifique a cada 3 segundos
         };
     </script>
 </head>
@@ -40,7 +47,8 @@
     <h1>Feliz Aniversário!</h1>
     <p>O vídeo começará em breve na TV.</p>
     <div id="player"></div>
-    <button id="castButton" style="display: none;">Transmitir Vídeo</button>
+    <button id="castButton" onclick="castVideo()" style="display: none;">Transmitir Vídeo</button>
 </body>
 </html>
+
 
