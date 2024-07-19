@@ -1,57 +1,47 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Aniversário!</title>
+  <title>Happy Birthday Mom!</title>
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
+      margin: 0;
+      padding: 20px;
     }
-    #player {
-      width: 100%;
-      max-width: 640px;
-      height: auto;
+    h1 {
+      text-align: center;
+      font-size: 2em;
+    }
+    .message {
+      text-align: center;
       margin-bottom: 20px;
     }
+    #castButton {
+      background-color: #f0594a; /* Adjust background color for the button */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
-  <script src="[https://www.youtube.com/iframe_api](https://www.youtube.com/iframe_api)"></script>
 </head>
 <body>
-  <h1>Feliz Aniversário!</h1>
-  <p>O vídeo começará em breve.</p>
-  <div id="player"></div>
-  <button id="castButton">Transmitir para a TV (Abra o site da operadora)</button>
+  <h1>Happy Birthday, Mom!</h1>
+  <p class="message">Here's a special video for you. Click the button below to cast it to the TV.</p>
+  <button id="castButton">Cast Video to TV</button>
+
   <script>
-    let player;
-
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        videoId: 'gT2wY0DjYGo',  // Substitua pelo ID do seu vídeo
-        events: {
-          'onReady': onPlayerReady
-        }
-      });
+    function castToYouTube() {
+      const youtubeUrl = "gT2wY0DjYGo"; // Replace with your desired video URL
+      window.location.href = youtubeUrl;
     }
 
-    function onPlayerReady(event) {
-      // No action needed here
-    }
-
-    window.onload = function() {
-      // Player initialization
-      document.getElementById('castButton').onclick = function() {
-        // Open operator's casting interface with the video URL (implementation depends on your operator)
-        // This section might involve browser automation or a bookmarklet
-      };
-    };
+    const castButton = document.getElementById("castButton");
+    castButton.addEventListener("click", castToYouTube);
   </script>
 </body>
 </html>
+
