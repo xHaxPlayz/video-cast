@@ -1,21 +1,89 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Aniversário, Mãe!</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Mom!</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      color: #888;
+    }
+
+    button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #3e8e41; /* Green hover */
+    }
+
+    /* Media Queries for Mobile Responsiveness (adjust as needed) */
+
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      h2 {
+        font-size: 1.4em;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Muitos parabéns, Mãe!</h1>
-        <p>Aqui está um vídeo especial para ti:</p>
-        <a href="https://www.youtube.com/watch?v=LJNJg55MnBY" class="play-button">Assistir</a>
-        <audio id="background-music" loop>
-            <source src="your_music.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-        <button id="mute-button">Mute</button>
-    </div>
+  <div class="container">
+    <h1>Muitos parabéns, Mãe!</h1>
+    <h2>Aqui está um vídeo especial para ti</h2>
+    <button id="playButton">Play Video</button>
+  </div>
+  <script>
+    const playButton = document.getElementById('playButton');
+
+    // Replace with your actual YouTube video URL
+    const videoUrl = "https://youtu.be/LJNJg55MnBY";
+
+    playButton.addEventListener('click', () => {
+      // Optional: Uncomment the following line to show the video embed
+      // document.getElementById('video').src = videoUrl;
+      
+      // Redirect to YouTube video on click
+      window.location.href = videoUrl;
+    });
+  </script>
 </body>
 </html>
