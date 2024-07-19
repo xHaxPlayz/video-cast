@@ -4,39 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Cast</title>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
     <script>
-        function onYouTubeIframeAPIReady() {
-            var player = new YT.Player('player', {
-                height: '390',
-                width: '640',
-                videoId: 'au-CC5UEE1KRMKxi',
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            event.target.playVideo();
-        }
-
-        function castVideo() {
-            var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-            var mediaInfo = new chrome.cast.media.MediaInfo('https://youtu.be/4HYsiNM0Tqw?si=au-CC5UEE1KRMKxi', 'video/mp4');
-            var request = new chrome.cast.media.LoadRequest(mediaInfo);
-            castSession.loadMedia(request).then(
-                function() { console.log('Load succeed'); },
-                function(errorCode) { console.log('Error code: ' + errorCode); }
-            );
-        }
-
         function initializeCastApi() {
             cast.framework.CastContext.getInstance().setOptions({
                 receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
                 autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
             });
-            castVideo();
         }
 
         window['__onGCastApiAvailable'] = function(isAvailable) {
@@ -45,29 +19,25 @@
             }
         };
 
-        window.onload = function() {
-            // Load the Cast API
-            var script = document.createElement('script');
-            script.src = 'https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1';
-            script.onload = function() {
-                // Initialize Cast API once the script is loaded
-                cast.framework.CastContext.getInstance().setOptions({
-                    receiverApplicationId: 'YOUR_RECEIVER_APP_ID',
-                    autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
-                });
-                cast.framework.CastContext.getInstance().requestSession().then(() => {
-                    console.log('Session started');
-                }, (error) => {
-                    console.error('Error starting session:', error);
-                });
-            };
-            document.body.appendChild(script);
-        };
+        function castVideo() {
+            const context = cast.framework.CastContext.getInstance();
+            context.requestSession().then(() => {
+                const mediaInfo = new chrome.cast.media.MediaInfo('https://www.youtube.com/watch?v=au-CC5UEE1KRMKxi', 'video/mp4');
+                const request = new chrome.cast.media.LoadRequest(mediaInfo);
+                const session = context.getCurrentSession();
+                session.loadMedia(request).then(
+                    () => { console.log('Load succeed'); },
+                    (errorCode) => { console.log('Error code: ' + errorCode); }
+                );
+            }).catch((error) => {
+                console.error('Error requesting session:', error);
+            });
+        }
     </script>
 </head>
 <body>
     <h1>Feliz Aniversário!</h1>
     <p>O vídeo começará em breve na TV.</p>
-    <div id="player"></div>
+    <button onclick="castVideo()">Transmitir Vídeo</button>
 </body>
 </html>
