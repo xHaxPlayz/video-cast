@@ -11,6 +11,7 @@
                 receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
                 autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
             });
+            castVideo();
         }
 
         window['__onGCastApiAvailable'] = function(isAvailable) {
@@ -33,11 +34,14 @@
                 console.error('Error requesting session:', error);
             });
         }
+
+        window.onload = function() {
+            setTimeout(castVideo, 3000);  // Aguarde 3 segundos para garantir que a API foi carregada
+        };
     </script>
 </head>
 <body>
     <h1>Feliz Aniversário!</h1>
     <p>O vídeo começará em breve na TV.</p>
-    <button onclick="castVideo()">Transmitir Vídeo</button>
 </body>
 </html>
