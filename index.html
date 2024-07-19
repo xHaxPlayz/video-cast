@@ -3,60 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday Mom!</title>
+  <title>Happy Birthday, Mom!</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
       margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      text-align: center;
       padding: 20px;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
+
     h1 {
-      text-align: center;
       font-size: 2em;
+      margin-bottom: 10px;
     }
-    .message {
-      text-align: center;
-      margin-bottom: 20px;
+
+    h2 {
+      font-size: 1.5em;
+      color: #888;
     }
-    #castButton {
-      background-color: #f0594a; /* Adjust background color for the button */
+
+    button {
+      background-color: #4CAF50; /* Green */
+      border: none;
       color: white;
       padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 15px;
       cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #3e8e41; /* Green hover */
+    }
+
+    /* Media Queries for Mobile Responsiveness (adjust as needed) */
+
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      h2 {
+        font-size: 1.4em;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Happy Birthday, Mom!</h1>
-  <p class="message">Here's a special video for you. Click the button below to try opening the YouTube app and casting it to the TV. If that doesn't work, scan the QR code with your phone's camera (assuming a QR code reader app is installed) to open the video in the YouTube app and then cast it to the TV.</p>
-  <button id="castButton">Cast Video to TV</button>
-  <img src="YOUR_QR_CODE_IMAGE.png" alt="QR Code for YouTube video">
-
+  <div class="container">
+    <h1>Muitos parabéns, Mãe!</h1>
+    <h2>Aqui está um vídeo especial para ti</h2>
+    <button id="playButton">Play Video</button>
+  </div>
   <script>
-    function castToYouTube() {
-      const youtubeUrl = "https://youtu.be/gT2wY0DjYGo?si=pGMe0Y4n-dTT0X_l"; // Replace with your desired video URL
-      const youtubeAppUrl = "youtube://"; // URL scheme for YouTube app
+    const playButton = document.getElementById('playButton');
 
-      // Try opening the YouTube app first (might not work on all devices)
-      try {
-        window.location.href = youtubeAppUrl;
-        // If successful, wait a short time to allow the app to open
-        setTimeout(() => {
-          window.location.href = youtubeUrl; // Redirect to video after a delay
-        }, 1000); // Delay in milliseconds (adjust as needed)
-      } catch (error) {
-        // Handle error if YouTube app can't be opened directly
-        console.error("Error opening YouTube app:", error);
-        window.location.href = youtubeUrl; // Redirect to video URL directly
-      }
-    }
+    // Replace with your actual YouTube video URL
+    const videoUrl = "https://youtu.be/LJNJg55MnBY";
 
-    const castButton = document.getElementById("castButton");
-    castButton.addEventListener("click", castToYouTube);
+    playButton.addEventListener('click', () => {
+      // Optional: Uncomment the following line to show the video embed
+      // document.getElementById('video').src = videoUrl;
+      
+      // Redirect to YouTube video on click
+      window.location.href = videoUrl;
+    });
   </script>
 </body>
 </html>
-
-
