@@ -1,17 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Aniversário!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #player {
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        #castButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #castButton:disabled {
+            background-color: #ccc;
+        }
+    </style>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         let player;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '390',
-                width: '640',
                 videoId: 'gT2wY0DjYGo', // Substitua pelo ID do seu vídeo
                 events: {
                     'onReady': onPlayerReady
@@ -21,6 +49,7 @@
 
         function onPlayerReady(event) {
             event.target.playVideo();
+            document.getElementById('castButton').disabled = false;
         }
 
         function castVideo() {
@@ -31,24 +60,15 @@
                 alert('Botão de transmissão não encontrado.');
             }
         }
-
-        window.onload = function() {
-            const checkCastButton = setInterval(() => {
-                const castButton = document.querySelector('button[aria-label="Transmitir"]');
-                if (castButton) {
-                    clearInterval(checkCastButton);
-                    castButton.click();
-                }
-            }, 3000); // Verifique a cada 3 segundos
-        };
     </script>
 </head>
 <body>
     <h1>Feliz Aniversário!</h1>
     <p>O vídeo começará em breve na TV.</p>
     <div id="player"></div>
-    <button id="castButton" onclick="castVideo()" style="display: none;">Transmitir Vídeo</button>
+    <button id="castButton" onclick="castVideo()" disabled>Transmitir Vídeo para a TV</button>
 </body>
 </html>
+
 
 
