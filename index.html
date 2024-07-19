@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Cast</title>
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
+    <script>
+        function initializeCastApi() {
+            cast.framework.CastContext.getInstance().setOptions({
+                receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+                autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+            });
+        }
+
+        window['__onGCastApiAvailable'] = function(isAvailable) {
+            if (isAvailable) {
+                initializeCastApi();
+            }
+        };
+
+        function castVideo() {
+            const context = cast.framework.CastContext.getInstance();
+            const session = context.getCurrentSession();
+
+            if (!session) {
+                context.requestSession().then(() => {
+                    playVideo();
+                }).catch((error) => {
+                    console.error('Error requesting session:', error);
+                });
+            } else {
+                playVideo();
+            }
+        }
+
+        function playVideo() {
+            const mediaInfo = new chrome.cast.media.MediaInfo('https://youtu.be/4HYsiNM0Tqw?si=rPFhz9vX_FZIae0l', 'video/mp4');
+            const request = new chrome.cast.media.LoadRequest(mediaInfo);
+
+            const session = cast.framework.CastContext.getInstance().getCurrentSession();
+            session.loadMedia(request).then(() => {
+                console.log('Load succeed');
+            }).catch((error) => {
+                console.error('Error loading media:', error);
+            });
+        }
+
+        window.onload = castVideo;
+    </script>
+</head>
+<body>
+    <h1>Feliz Aniversário!</h1>
+    <p>O vídeo começará em breve na TV.</p>
+</body>
+</html>
