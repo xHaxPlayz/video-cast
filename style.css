@@ -1,68 +1,64 @@
-/* Body Background and Text Color */
-
 body {
-  background-color: #f7e6f0; /* Light pink background */
-  color: #663399; /* Dark purple for text */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
 }
-
-/* Container with Birthday Decoration Border */
 
 .container {
-  border: 5px solid #ffc1cc; /* Light pink dotted border */
-  border-style: dashed;
-  padding: 30px;
-  margin-top: 50px; /* Add some space from the top */
+    text-align: center;
+    padding: 50px;
 }
-
-/* Title with Gradient and Shadow */
 
 h1 {
-  font-size: 2.5em;
-  text-align: center;
-  background: linear-gradient(to right, #ffc1cc, #ffb3d9); /* Pink gradient */
-  -webkit-background-clip: text; /* For Chrome and Safari */
-  -webkit-text-fill-color: transparent; /* For Chrome and Safari */
-  text-shadow: 1px 1px 2px #f7e6f0; /* Light pink shadow */
-  margin-bottom: 20px;
+    font-size: 3em;
+    color: #f0594a;
+    margin-bottom: 20px;
 }
 
-/* Subtitle with Italics and Decoration */
-
-h2 {
-  font-style: italic;
-  font-size: 1.8em;
-  text-decoration: underline dotted #ffc1cc; /* Light pink dotted underline */
-  margin-bottom: 20px;
+p {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-/* Play Button with Birthday Theme Colors */
-
-button {
-  background-color: #ffc1cc; /* Light pink background */
-  color: #663399; /* Dark purple text */
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease; /* Add smooth hover effect */
+.play-button {
+    background-color: #f0594a;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
-button:hover {
-  background-color: #ffb3d9; /* Lighter pink on hover */
+.play-button:hover {
+    background-color: #d74a3c;
 }
 
-/* Media Queries for Mobile Responsiveness (adjust as needed) */
-
-@media screen and (max-width: 768px) {
-  h1 {
-    font-size: 2em;
-  }
-  h2 {
-    font-size: 1.6em;
-  }
-  .container {
-    padding: 20px;
-    margin-top: 30px;
-  }
+#mute-button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
+
+#mute-button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Optional Animations (Uncomment to enable) */
+
+/* h1 {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
+} */
+
+/* You can add additional styles for background music player here */
