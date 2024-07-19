@@ -35,6 +35,7 @@
         }
     </style>
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
     <script>
         let player;
 
@@ -52,23 +53,47 @@
             document.getElementById('castButton').disabled = false;
         }
 
-        function castVideo() {
-            const castButton = document.querySelector('button[aria-label="Transmitir"]');
-            if (castButton) {
-                castButton.click();
-            } else {
-                alert('Botão de transmissão não encontrado.');
-            }
+        function initializeCastApi() {
+            cast.framework.CastContext.getInstance().setOptions({
+                receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID,
+                autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
+            });
         }
+
+        function castVideo() {
+            const context = cast.framework.CastContext.getInstance();
+            context.requestSession().then(() => {
+                const mediaInfo = new chrome.cast.media.MediaInfo('https://www.youtube.com/watch?v=YOUR_VIDEO_ID', 'video/mp4');
+                const request = new chrome.cast.media.LoadRequest(mediaInfo);
+                const session = context.getCurrentSession();
+                session.loadMedia(request).then(
+                    () => { console.log('Load succeed'); },
+                    (errorCode) => { console.log('Error code: ' + errorCode); }
+                );
+            }).catch((error) => {
+                console.error('Error requesting session:', error);
+            });
+        }
+
+        window['__onGCastApiAvailable'] = function(isAvailable) {
+            if (isAvailable) {
+                initializeCastApi();
+            }
+        };
+
+        window.onload = function() {
+            document.getElementById('castButton').onclick = castVideo;
+        };
     </script>
 </head>
 <body>
     <h1>Feliz Aniversário!</h1>
     <p>O vídeo começará em breve na TV.</p>
     <div id="player"></div>
-    <button id="castButton" onclick="castVideo()" disabled>Transmitir Vídeo para a TV</button>
+    <button id="castButton" disabled>Transmitir Vídeo para a TV</button>
 </body>
 </html>
+
 
 
 
