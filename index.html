@@ -12,10 +12,9 @@
             player = new YT.Player('player', {
                 height: '390',
                 width: '640',
-                videoId: '98m0QcOhKsIAqQJx', // Substitua pelo ID do seu vídeo
+                videoId: '9I1LtZOx2N2QxIN7', // Substitua pelo ID do seu vídeo
                 events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
+                    'onReady': onPlayerReady
                 }
             });
         }
@@ -24,22 +23,31 @@
             event.target.playVideo();
         }
 
-        function onPlayerStateChange(event) {
-            if (event.data == YT.PlayerState.PLAYING) {
-                const castButtonCheckInterval = setInterval(() => {
-                    const castButton = document.querySelector('button[aria-label="Transmitir"]');
-                    if (castButton) {
-                        clearInterval(castButtonCheckInterval);
-                        castButton.click();
-                    }
-                }, 1000);
+        function castVideo() {
+            const castButton = document.querySelector('button[aria-label="Transmitir"]');
+            if (castButton) {
+                castButton.click();
+            } else {
+                alert('Botão de transmissão não encontrado.');
             }
         }
+
+        window.onload = function() {
+            const checkCastButton = setInterval(() => {
+                const castButton = document.querySelector('button[aria-label="Transmitir"]');
+                if (castButton) {
+                    clearInterval(checkCastButton);
+                    castButton.click();
+                }
+            }, 3000); // Verifique a cada 3 segundos
+        };
     </script>
 </head>
 <body>
     <h1>Feliz Aniversário!</h1>
     <p>O vídeo começará em breve na TV.</p>
     <div id="player"></div>
+    <button id="castButton" onclick="castVideo()" style="display: none;">Transmitir Vídeo</button>
 </body>
 </html>
+
