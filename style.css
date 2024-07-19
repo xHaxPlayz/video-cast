@@ -6,19 +6,52 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f7f7f7; /* Light gray background */
+  background-color: #fdfdfd; /* Light gray background */
   background-image: url("path/to/your/image.jpg"); /* Optional background image */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; /* Adjust background size as needed */
 }
 
-.container {
+.container.birthday-theme {
   text-align: center;
   padding: 20px;
   border-radius: 5px;
   background-color: #e0ebeb; /* Light lavender background */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative; /* For confetti animation (optional) */
+}
+
+/* Optional confetti animation styles (add these to style.css) */
+.confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.confetti .confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f0f;
+  animation-name: confetti-fall;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -100%, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(random(-200%, 200%), 100%, 0);
+    opacity: 0;
+  }
 }
 
 h1 {
@@ -44,20 +77,5 @@ button {
   margin-top: 15px;
   cursor: pointer;
   border-radius: 5px;
-  transition: all 0.2s ease-in-out; /* Add transition for hover effect */
-}
+  transition: all 0.
 
-button:hover {
-  background-color: #ba97d8; /* Slightly darker purple on hover */
-}
-
-/* Media Queries for Mobile Responsiveness (adjust as needed) */
-
-@media screen and (max-width: 768px) {
-  h1 {
-    font-size: 1.8em;
-  }
-  h2 {
-    font-size: 1.4em;
-  }
-}
